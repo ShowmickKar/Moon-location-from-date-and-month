@@ -7,7 +7,7 @@ from operator import itemgetter
 class Moon:
     def __init__(self, orbit_radius):
         self.radius = 10
-        self.visible = False
+        # self.visible = False
         self.orbit_radius = orbit_radius
         self.orbit = get_pixels(200, 200, self.orbit_radius)
         print(self.orbit)
@@ -26,23 +26,31 @@ class Moon:
         return pixel[0], pixel[1]
 
     def __sort_axis_pixels(self):
-        for zone in range(8):
-            if zone == 0:
-                self.orbit[zone].sort(key=itemgetter(1), reverse=True)
-            elif zone == 1:
-                self.orbit[zone].sort(key=itemgetter(0), reverse=True)
-            elif zone == 2:
-                self.orbit[zone].sort(key=itemgetter(0), reverse=True)
-            elif zone == 3:
-                self.orbit[zone].sort(key=itemgetter(1), reverse=False)
-            elif zone == 4:
-                self.orbit[zone].sort(key=itemgetter(1), reverse=False)
-            elif zone == 5:
-                self.orbit[zone].sort(key=itemgetter(0), reverse=False)
-            elif zone == 6:
-                self.orbit[zone].sort(key=itemgetter(0), reverse=False)
-            else:
-                self.orbit[zone].sort(key=itemgetter(1), reverse=True)
+        self.orbit[0].sort(key=itemgetter(1), reverse=True)
+        self.orbit[1].sort(key=itemgetter(0), reverse=True)
+        self.orbit[2].sort(key=itemgetter(0), reverse=True)
+        self.orbit[3].sort(key=itemgetter(1), reverse=False)
+        self.orbit[4].sort(key=itemgetter(1), reverse=False)
+        self.orbit[5].sort(key=itemgetter(0), reverse=False)
+        self.orbit[6].sort(key=itemgetter(0), reverse=False)
+        self.orbit[7].sort(key=itemgetter(1), reverse=True)
+        # for zone in range(8):
+        #     if zone == 0:
+        #         self.orbit[zone].sort(key=itemgetter(1), reverse=True)
+        #     elif zone == 1:
+        #         self.orbit[zone].sort(key=itemgetter(0), reverse=True)
+        #     elif zone == 2:
+        #         self.orbit[zone].sort(key=itemgetter(0), reverse=True)
+        #     elif zone == 3:
+        #         self.orbit[zone].sort(key=itemgetter(1), reverse=False)
+        #     elif zone == 4:
+        #         self.orbit[zone].sort(key=itemgetter(1), reverse=False)
+        #     elif zone == 5:
+        #         self.orbit[zone].sort(key=itemgetter(0), reverse=False)
+        #     elif zone == 6:
+        #         self.orbit[zone].sort(key=itemgetter(0), reverse=False)
+        #     else:
+        #         self.orbit[zone].sort(key=itemgetter(1), reverse=True)
 
     def draw(self, window):
         # Draw moons orbit
