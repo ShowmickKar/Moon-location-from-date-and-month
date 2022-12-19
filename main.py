@@ -7,6 +7,7 @@ Reference
 
 import pygame
 import random
+from line import draw_line
 from moon import Moon
 
 
@@ -58,12 +59,16 @@ def animate(window, moon, z0, z1):
 
 
 def draw_axis(window):
-    pygame.draw.line(window, (160, 32, 240), (HEIGHT, 0), (0, HEIGHT))
-    pygame.draw.line(window, (160, 32, 240), (0, 0), (HEIGHT, HEIGHT))
-    pygame.draw.line(window, (160, 32, 240),
-                     (HEIGHT//2, 0), (HEIGHT//2, HEIGHT))
-    pygame.draw.line(window, (160, 32, 240),
-                     (0, HEIGHT // 2), (HEIGHT, HEIGHT//2))
+    draw_line(window, HEIGHT, 0, 0, HEIGHT)
+    draw_line(window, 0, 0, HEIGHT, HEIGHT)
+    draw_line(window, HEIGHT//2, 0, HEIGHT//2, HEIGHT)
+    draw_line(window, 0, HEIGHT // 2, HEIGHT, HEIGHT//2)
+    # pygame.draw.line(window, (160, 32, 240), (HEIGHT, 0), (0, HEIGHT))
+    # pygame.draw.line(window, (160, 32, 240), (0, 0), (HEIGHT, HEIGHT))
+    # pygame.draw.line(window, (160, 32, 240),
+    #                  (HEIGHT//2, 0), (HEIGHT//2, HEIGHT))
+    # pygame.draw.line(window, (160, 32, 240),
+    #                  (0, HEIGHT // 2), (HEIGHT, HEIGHT//2))
 
 
 user_input = ""
@@ -77,7 +82,8 @@ def refresh_window(window, moon, input_box_color=(255, 0, 0), invalid=False):
     draw_axis(window)
 
     # Draw the earth
-    pygame.draw.circle(window, (255, 255, 0), (200, 200), 15)
+    pygame.draw.circle(window, (0, 0, 180), (200, 200), 15)
+
     # draw the moon
     moon.draw(window)
     # moon.draw(window)
@@ -101,7 +107,7 @@ def refresh_window(window, moon, input_box_color=(255, 0, 0), invalid=False):
 
 def calculate_new_zone(month, day):
     print(f"Month & Day: {month} {day}")
-    new_zone = ((month * 30 + day) % 7)
+    new_zone = (((month - 1) * 30 + day) % 7)
     # return random.choice([1, 2, 3, 4, 5, 6, 7])
     return new_zone
 
@@ -111,7 +117,6 @@ def main(window):
     moon = Moon(150)
     run = True
     z0 = moon.zone
-    z1 = 5
     invalid = False
     input_box = pygame.Rect(500, 50, 100, 40)
     active = False
@@ -140,8 +145,9 @@ def main(window):
                                 z1 = calculate_new_zone(month, day)
                                 moon.rotation = True
                             else:
-                                invalid = True
-                                user_input = ""
+                                raise(Exception)
+                                # invalid = True
+                                # user_input = ""
                         except:
                             user_input = ""
                             invalid = True
