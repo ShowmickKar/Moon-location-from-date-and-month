@@ -54,13 +54,3 @@ class Moon:
         # Draw the moon
 
         pygame.draw.circle(window, self.color, (self.x, self.y), self.radius)
-
-
-0 {()}
-1
-2
-3
-4
-5
-6
-7
